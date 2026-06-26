@@ -109,3 +109,63 @@
 [2026-06-26 14:35:06,520] INFO in logger: Logger initialised.
 [2026-06-26 14:35:49,342] INFO in logger: Logger initialised.
 [2026-06-26 14:35:50,001] INFO in logger: Logger initialised.
+[2026-06-26 14:55:18,192] INFO in logger: Logger initialised.
+[2026-06-26 14:55:18,193] INFO in logger: Logger initialised.
+[2026-06-26 14:55:55,083] INFO in logger: Logger initialised.
+[2026-06-26 14:55:55,084] INFO in logger: Logger initialised.
+[2026-06-26 14:56:18,191] INFO in logger: Logger initialised.
+[2026-06-26 14:56:18,192] INFO in logger: Logger initialised.
+[2026-06-26 14:56:47,445] INFO in logger: Logger initialised.
+[2026-06-26 16:08:05,266] INFO in logger: Logger initialised.
+[2026-06-26 16:08:14,699] INFO in logger: Logger initialised.
+[2026-06-26 16:08:15,030] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:15,321] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:17,203] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:17,381] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:18,650] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:19,339] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:19,892] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:19,903] INFO in loan_service: Loan application #1 created by user #1 (credit score 307)
+[2026-06-26 16:08:20,440] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:20,986] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:21,529] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:22,069] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:22,649] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:23,202] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:23,732] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:23,737] INFO in loan_service: Loan application #1 created by user #1 (credit score 335)
+[2026-06-26 16:08:23,742] INFO in loan_service: Loan application #2 created by user #1 (credit score 350)
+[2026-06-26 16:08:24,295] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:24,478] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:24,484] INFO in loan_service: Loan application #1 created by user #1 (credit score 436)
+[2026-06-26 16:08:25,015] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:25,188] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:25,193] INFO in loan_service: Loan application #1 created by user #1 (credit score 488)
+[2026-06-26 16:08:25,723] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:26,274] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:26,459] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:26,465] INFO in loan_service: Loan application #1 created by user #1 (credit score 624)
+[2026-06-26 16:08:26,469] INFO in audit_service: Audit entry created — loan #1 approved by officer #2
+[2026-06-26 16:08:26,472] INFO in loan_service: Loan #1 approved by officer #2
+[2026-06-26 16:08:27,023] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:27,190] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:27,195] INFO in loan_service: Loan application #1 created by user #1 (credit score 694)
+[2026-06-26 16:08:27,199] INFO in audit_service: Audit entry created — loan #1 rejected by officer #2
+[2026-06-26 16:08:27,200] INFO in loan_service: Loan #1 rejected by officer #2
+[2026-06-26 16:08:27,718] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:27,906] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:27,912] INFO in loan_service: Loan application #1 created by user #1 (credit score 640)
+[2026-06-26 16:08:27,916] INFO in audit_service: Audit entry created — loan #1 approved by officer #2
+[2026-06-26 16:08:27,917] INFO in loan_service: Loan #1 approved by officer #2
+[2026-06-26 16:08:28,480] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:28,657] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:28,662] INFO in loan_service: Loan application #1 created by user #1 (credit score 535)
+[2026-06-26 16:08:29,203] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:29,744] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:29,921] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:29,928] INFO in loan_service: Loan application #1 created by user #1 (credit score 825)
+[2026-06-26 16:08:29,933] INFO in audit_service: Audit entry created — loan #1 approved by officer #2
+[2026-06-26 16:08:29,934] INFO in loan_service: Loan #1 approved by officer #2
+[2026-06-26 16:08:30,445] INFO in auth_service: User logged in: customer@test.com
+[2026-06-26 16:08:30,615] INFO in auth_service: User logged in: officer@test.com
+[2026-06-26 16:08:30,622] INFO in loan_service: Loan application #1 created by user #1 (credit score 478)

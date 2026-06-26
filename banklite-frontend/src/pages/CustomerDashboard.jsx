@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default function CustomerDashboard() {
     const [loans, setLoans] = useState([]);
-    const userName = localStorage.getItem('name');
 
     useEffect(() => {
         // Mock data fallback if backend isn't connected yet, otherwise fetch

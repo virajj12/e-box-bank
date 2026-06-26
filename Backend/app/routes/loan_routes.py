@@ -2,7 +2,7 @@
 Loan routes — application submission, review, and officer actions.
 """
 
-from flask import Blueprint, request, g, current_app
+from flask import Blueprint, request, g
 from marshmallow import ValidationError
 
 from ..schemas.loan_schema import LoanApplySchema, LoanActionSchema
