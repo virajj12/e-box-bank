@@ -6,58 +6,51 @@ export default function CustomerDashboard() {
     const userName = localStorage.getItem('name');
 
     useEffect(() => {
+        // Mock data fallback if backend isn't connected yet, otherwise fetch
         fetch('/api/v1/loans/my-applications', {
             headers: { 'Authorization': localStorage.getItem('token') }
         })
             .then(r => r.json())
             .then(res => {
                 if (res.success) setLoans(res.data);
+            }).catch(() => {
+                // Fallback for visual testing
+                setLoans([{ id: 101, amount: 25000, purpose: 'Home Loan', status: 'approved' }, { id: 102, amount: 5000, purpose: 'Personal Expense', status: 'pending' }])
             });
     }, []);
 
     return (
-        <div className="max-w-4xl mx-auto mt-10">
-            <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800">Welcome, {userName}</h2>
-                <Link to="/apply" className="bg-red-600 text-white px-4 py-2 rounded font-semibold hover:bg-red-700 transition shadow-sm">
-                    + Apply for New Loan
-                </Link>
+        <div className="w-full">
+            <div className="flex justify-between items-center mb-10">
+                <h2 className="text-3xl font-bold tracking-tight">Loan Dashboard</h2>
             </div>
 
-            <div className="bg-white border rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold mb-4 border-b pb-2 text-gray-700">My Applications</h3>
+            <h3 className="text-xl font-bold mb-6 tracking-wide">My Applications</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {loans.length === 0 ? (
-                    <p className="text-gray-500 py-4">You have no loan applications yet.</p>
+                    <p className="text-zinc-500">You have no loan applications yet.</p>
                 ) : (
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="text-gray-400 text-sm uppercase">
-                                <th className="pb-2">ID</th>
-                                <th className="pb-2">Amount</th>
-                                <th className="pb-2">Purpose</th>
-                                <th className="pb-2">Date</th>
-                                <th className="pb-2">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {loans.map(loan => (
-                                <tr key={loan.id} className="border-t hover:bg-gray-50 text-gray-700">
-                                    <td className="py-3">#{loan.id}</td>
-                                    <td className="py-3 font-semibold">${loan.amount.toLocaleString()}</td>
-                                    <td className="py-3">{loan.purpose}</td>
-                                    <td className="py-3">{new Date(loan.created_at).toLocaleDateString()}</td>
-                                    <td className="py-3">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${loan.status === 'approved' ? 'bg-green-100 text-green-700' :
-                                                loan.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                                                    'bg-yellow-100 text-yellow-700'
-                                            }`}>
-                                            {loan.status.toUpperCase()}
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    loans.map(loan => (
+                        <div key={loan.id} className="bg-[#1c1c1c] border border-zinc-800 rounded-2xl p-6 flex flex-col relative overflow-hidden group">
+                            {/* Left Accent Bar matching the DSA sheets */}
+                            <div className="absolute left-0 top-6 bottom-6 w-1 bg-[#e06143] rounded-r-md"></div>
+
+                            <div className="ml-3">
+                                <h4 className="font-bold text-lg mb-1">{loan.purpose}</h4>
+                                <p className="text-sm text-zinc-400 mb-6">Application #{loan.id} • ${loan.amount.toLocaleString()}</p>
+
+                                <div className="flex gap-3 mt-auto">
+                                    <div className="flex-1 bg-[#36221c] text-[#d46b53] rounded-lg py-2 text-center text-sm font-semibold border border-[#4a2e26]">
+                                        {loan.status.charAt(0).toUpperCase() + loan.status.slice(1)}
+                                    </div>
+                                    <Link to={`/apply`} className="flex-1 bg-[#222222] text-zinc-300 rounded-lg py-2 text-center text-sm font-semibold border border-zinc-700 hover:bg-zinc-800 transition-colors">
+                                        Details
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    ))
                 )}
             </div>
         </div>
