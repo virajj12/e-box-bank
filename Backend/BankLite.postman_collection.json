@@ -1,0 +1,220 @@
+{
+  "info": {
+    "name": "BankLite — Smart Loan Origination System",
+    "description": "Complete API collection for the BankLite backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api/v1"
+    },
+    {
+      "key": "customer_token",
+      "value": ""
+    },
+    {
+      "key": "officer_token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login — Customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.success) {",
+                  "    pm.collectionVariables.set('customer_token', json.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"customer@test.com\",\n    \"password\": \"customer123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login — Officer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.success) {",
+                  "    pm.collectionVariables.set('officer_token', json.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"officer@test.com\",\n    \"password\": \"officer123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loan Applications — Customer",
+      "item": [
+        {
+          "name": "Apply for Loan",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "{{customer_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"amount\": 100000,\n    \"purpose\": \"Home Loan\",\n    \"monthly_income\": 70000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/loans/apply",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "apply"]
+            }
+          }
+        },
+        {
+          "name": "My Applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "{{customer_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/loans/my-applications",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "my-applications"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loan Review — Officer",
+      "item": [
+        {
+          "name": "Pending Applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "{{officer_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/loans/pending",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "pending"]
+            }
+          }
+        },
+        {
+          "name": "Application Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "{{officer_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/loans/1",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "1"]
+            }
+          }
+        },
+        {
+          "name": "Approve Loan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "{{officer_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"action\": \"approved\",\n    \"comments\": \"Income verified. Good credit score.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/loans/1/action",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "1", "action"]
+            }
+          }
+        },
+        {
+          "name": "Reject Loan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "{{officer_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"action\": \"rejected\",\n    \"comments\": \"Low repayment capacity.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/loans/2/action",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "2", "action"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit Trail — Officer",
+      "item": [
+        {
+          "name": "Audit History for Loan",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "{{officer_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/1",
+              "host": ["{{base_url}}"],
+              "path": ["audit", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
