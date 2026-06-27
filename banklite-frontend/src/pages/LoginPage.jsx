@@ -1,10 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [checking, setChecking] = useState(true);
     const navigate = useNavigate();
+
+    // Auto-redirect if a valid session token exists in localStorage
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!token) {
+            setChecking(false);
+            return;
+        }
+
+        fetch('/api/v1/auth/validate', {
+            headers: { 'Authorization': token }
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    // Token is still valid — redirect to the correct dashboard
+                    navigate(res.data.role === 'customer' ? '/customer' : '/officer');
+                } else {
+                    // Token expired or invalid — clear and show login
+                    localStorage.clear();
+                    setChecking(false);
+                }
+            })
+            .catch(() => {
+                // Backend unreachable — fall back to stored role if available
+                if (role) {
+                    navigate(role === 'customer' ? '/customer' : '/officer');
+                } else {
+                    localStorage.clear();
+                    setChecking(false);
+                }
+            });
+    }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,17 +60,25 @@ export default function LoginPage() {
                 alert("Login Failed. Please check your credentials.");
             }
         } catch {
-            // Fallback for visual testing without backend running
-            localStorage.setItem('token', 'mock-token');
-            localStorage.setItem('role', 'customer');
-            navigate('/customer');
+            alert("Unable to connect to the server.");
         }
     };
 
     const handleRegister = () => {
-        // Navigate to a register route (you can create a RegisterPage later)
         navigate('/register');
     };
+
+    // Show a loading spinner while validating the stored token
+    if (checking) {
+        return (
+            <div className="flex h-[80vh] items-center justify-center">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="w-10 h-10 border-4 border-zinc-700 border-t-[#e06143] rounded-full animate-spin"></div>
+                    <p className="text-zinc-500 text-sm">Checking session…</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex h-[80vh] items-center justify-center">

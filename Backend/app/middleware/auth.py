@@ -34,7 +34,7 @@ def customer_required(fn):
         if user is None:
             return error_response("Authentication required.", 401)
         if user.role != "customer":
-            return error_response("Access denied. Customers only.", 403)
+            return error_response("Access denied. Customers only.", 430)
         g.current_user = user
         return fn(*args, **kwargs)
     return wrapper

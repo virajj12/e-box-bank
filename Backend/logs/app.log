@@ -169,3 +169,45 @@
 [2026-06-26 16:08:30,445] INFO in auth_service: User logged in: customer@test.com
 [2026-06-26 16:08:30,615] INFO in auth_service: User logged in: officer@test.com
 [2026-06-26 16:08:30,622] INFO in loan_service: Loan application #1 created by user #1 (credit score 478)
+[2026-06-26 22:05:31,945] INFO in logger: Logger initialised.
+[2026-06-26 22:05:32,567] INFO in logger: Logger initialised.
+[2026-06-26 22:05:53,088] INFO in logger: Logger initialised.
+[2026-06-26 22:05:53,648] INFO in logger: Logger initialised.
+[2026-06-26 22:08:38,442] INFO in auth_service: New user registered: vjvirajjain122005@gmail.com (customer)
+[2026-06-26 22:08:44,658] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 09:16:23,886] INFO in logger: Logger initialised.
+[2026-06-27 09:16:24,694] INFO in logger: Logger initialised.
+[2026-06-27 09:16:55,688] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 09:22:21,849] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 09:45:19,614] INFO in logger: Logger initialised.
+[2026-06-27 09:46:24,360] INFO in logger: Logger initialised.
+[2026-06-27 09:46:25,065] INFO in logger: Logger initialised.
+[2026-06-27 09:47:03,772] INFO in auth_service: New user registered: vjvirajjain122005@gmail.com (customer)
+[2026-06-27 09:47:08,215] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 09:48:20,699] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 09:53:17,355] INFO in loan_service: Loan application #1 created by user #3 (credit score 345)
+[2026-06-27 10:03:10,337] INFO in logger: Logger initialised.
+[2026-06-27 10:05:33,556] INFO in logger: Logger initialised.
+[2026-06-27 10:05:34,216] INFO in logger: Logger initialised.
+[2026-06-27 10:06:10,665] INFO in logger: Logger initialised.
+[2026-06-27 10:06:11,330] INFO in logger: Logger initialised.
+[2026-06-27 10:07:14,770] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 10:07:48,123] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 10:09:22,640] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 10:10:46,537] INFO in logger: Logger initialised.
+[2026-06-27 10:10:46,611] INFO in logger: Logger initialised.
+[2026-06-27 10:14:11,822] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 10:14:32,061] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 10:14:55,546] INFO in audit_service: Audit entry created — loan #1 rejected by officer #2
+[2026-06-27 10:14:55,563] INFO in loan_service: Loan #1 rejected by officer #2
+[2026-06-27 10:15:02,376] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 10:15:32,481] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 10:16:54,569] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 10:17:12,185] INFO in logger: Logger initialised.
+[2026-06-27 10:17:12,186] INFO in logger: Logger initialised.
+[2026-06-27 10:17:38,592] INFO in logger: Logger initialised.
+[2026-06-27 10:17:38,594] INFO in logger: Logger initialised.
+[2026-06-27 10:18:55,214] INFO in auth_service: User logged in: officer@test.com
+[2026-06-27 10:19:09,720] INFO in auth_service: User logged in: vjvirajjain122005@gmail.com
+[2026-06-27 10:19:34,831] INFO in loan_service: Loan application #2 created by user #3 (credit score 510)
+[2026-06-27 10:19:41,651] INFO in auth_service: User logged in: officer@test.com

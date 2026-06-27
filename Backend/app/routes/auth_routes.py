@@ -93,3 +93,47 @@ def register():
         return error_response(error, 400)
 
     return success_response(result, 201)
+
+
+@auth_bp.route("/validate", methods=["GET"])
+def validate_token():
+    """
+    GET /api/v1/auth/validate
+
+    Check if a session token stored in localStorage is still valid.
+    Returns the user's role and name so the frontend can auto-redirect.
+    """
+    from ..models.user import User
+
+    token = request.headers.get("Authorization", "").strip()
+    if not token:
+        return error_response("No token provided.", 401)
+
+    user = User.query.filter_by(session_token=token).first()
+    if user is None:
+        return error_response("Invalid or expired token.", 401)
+
+    return success_response({
+        "role": user.role,
+        "full_name": user.full_name,
+    })
+
+
+@auth_bp.route("/profile", methods=["GET"])
+def get_profile():
+    """
+    GET /api/v1/auth/profile
+
+    Return the full profile of the currently authenticated user.
+    """
+    from ..models.user import User
+
+    token = request.headers.get("Authorization", "").strip()
+    if not token:
+        return error_response("No token provided.", 401)
+
+    user = User.query.filter_by(session_token=token).first()
+    if user is None:
+        return error_response("Invalid or expired token.", 401)
+
+    return success_response(user.to_dict())

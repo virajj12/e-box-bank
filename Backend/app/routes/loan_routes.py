@@ -10,6 +10,7 @@ from ..services.loan_service import (
     create_application,
     get_user_applications,
     get_pending_applications,
+    get_processed_applications,
     get_application_detail,
     process_action,
 )
@@ -83,6 +84,18 @@ def pending_applications():
     Return all applications with status ``pending`` (officer only).
     """
     apps = get_pending_applications()
+    return success_response(apps)
+
+
+@loan_bp.route("/loans/history", methods=["GET"])
+@officer_required
+def history_applications():
+    """
+    GET /api/v1/loans/history
+
+    Return all approved/rejected applications (officer only).
+    """
+    apps = get_processed_applications()
     return success_response(apps)
 
 

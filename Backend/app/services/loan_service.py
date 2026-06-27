@@ -5,6 +5,7 @@ Loan service — business logic for loan applications and officer actions.
 import random
 from flask import current_app
 from ..models.loan import LoanApplication
+from ..models.audit import AuditLog
 from ..models.user import User
 from ..extensions import db
 from .audit_service import create_audit_entry
@@ -49,14 +50,33 @@ def create_application(
 
 
 def get_user_applications(user_id: int) -> list[dict]:
-    """Return all applications belonging to a specific user."""
+    """Return all applications belonging to a specific user, with audit data."""
     apps = (
         LoanApplication.query
         .filter_by(user_id=user_id)
         .order_by(LoanApplication.created_at.desc())
         .all()
     )
-    return [a.to_dict() for a in apps]
+    results = []
+    for app in apps:
+        data = app.to_dict()
+        # Attach the latest audit entry (officer decision) if any
+        audit = (
+            AuditLog.query
+            .filter_by(application_id=app.id)
+            .order_by(AuditLog.timestamp.desc())
+            .first()
+        )
+        if audit:
+            officer = db.session.get(User, audit.officer_id)
+            data["audit"] = {
+                "officer_name": officer.full_name if officer else "Unknown",
+                "action": audit.action,
+                "comments": audit.comments,
+                "timestamp": audit.timestamp.isoformat(),
+            }
+        results.append(data)
+    return results
 
 
 def get_pending_applications() -> list[dict]:
@@ -68,6 +88,38 @@ def get_pending_applications() -> list[dict]:
         .all()
     )
     return [a.to_dict() for a in apps]
+
+
+def get_processed_applications() -> list[dict]:
+    """Return all applications that have been approved or rejected, with audit data."""
+    apps = (
+        LoanApplication.query
+        .filter(LoanApplication.status.in_(["approved", "rejected"]))
+        .order_by(LoanApplication.created_at.desc())
+        .all()
+    )
+    results = []
+    for app in apps:
+        data = app.to_dict()
+        applicant = db.session.get(User, app.user_id)
+        data["customer_name"] = applicant.full_name if applicant else "Unknown"
+        # Attach the latest audit entry
+        audit = (
+            AuditLog.query
+            .filter_by(application_id=app.id)
+            .order_by(AuditLog.timestamp.desc())
+            .first()
+        )
+        if audit:
+            officer = db.session.get(User, audit.officer_id)
+            data["audit"] = {
+                "officer_name": officer.full_name if officer else "Unknown",
+                "action": audit.action,
+                "comments": audit.comments,
+                "timestamp": audit.timestamp.isoformat(),
+            }
+        results.append(data)
+    return results
 
 
 def get_application_detail(application_id: int) -> dict | None:
